@@ -18,33 +18,18 @@
     </div>
     <div id="background"></div>
     <div class= container id="form">
-       <form>
-            <div class="form-group">
+       <form id="search-form">
+            <div class="form-group" id="search-state">
                 <label for="input-state">State</label>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id='input-state' placeholder="Oregon" aria-label="State" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button">Search By State</button>
-                    </div>
-                  </div>                  
+                <input type="text" class="form-control" id='input-state' placeholder="Oregon">              
             </div>
-            <div class="form-group">
+            <div class="form-group" id="search-city">
                 <label for="input-city">City</label>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id='input-city' placeholder="Portland" aria-label="City" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button">Search By City</button>
-                    </div>
-                  </div>                  
+                <input type="text" class="form-control" id='input-city' placeholder="Portland">             
             </div>
-            <div class="form-group">
-                <label for="input-keyword">Look Up Brewery</label>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id='input-keyword' placeholder="Brewery" aria-label="keyword" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button">Search By Brewery</button>
-                    </div>
-                  </div>                  
+            <div class="form-group" id="search-keyword">
+                <label for="input-keyword">Search Brewery</label>
+                <input type="text" class="form-control" id='input-keyword' placeholder="Brewery Name">              
             </div>
             <div class="form-group">
                 <label for="beer-type">Beer Type</label>
@@ -62,9 +47,25 @@
                      <option>proprietor</option>
                     <option>closed</option>
                 </select>
-              </div>
-       </form> 
+              </div> 
+            <button type="submit" class="btn btn-secondary btn-lg btn-block">Find me a beer!</button>
+       </form>
+       
     </div>
-    <div id="beerlist"></div>
+    <div id="beerlist">
+        <div class="container">
+            <div class="row justify-content-md-center">
+              <div class="col">
+                <h2>List of Breweries</h2>
+              </div>
+              <div class="col-6">
+                <h2 class="text-center">Brewery Details</h2>
+              </div>
+              <div class="col">
+                <h2>Favorites List</h2>
+              </div>
+            </div>
+          </div>
+    </div>
   </body>
 </html>
