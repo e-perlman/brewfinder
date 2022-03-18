@@ -21,11 +21,30 @@
        <form>
             <div class="form-group">
                 <label for="input-state">State</label>
-                <input type="text" class="'form-control" id="input-state" placeholder="Oregon">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id='input-state' placeholder="Oregon" aria-label="State" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button">Search By State</button>
+                    </div>
+                  </div>                  
             </div>
             <div class="form-group">
                 <label for="input-city">City</label>
-                <input type="text" class="'form-control" id="input-city" placeholder="Portland">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id='input-city' placeholder="Portland" aria-label="City" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button">Search By City</button>
+                    </div>
+                  </div>                  
+            </div>
+            <div class="form-group">
+                <label for="input-keyword">Look Up Brewery</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id='input-keyword' placeholder="Brewery" aria-label="keyword" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button">Search By Brewery</button>
+                    </div>
+                  </div>                  
             </div>
             <div class="form-group">
                 <label for="beer-type">Beer Type</label>
