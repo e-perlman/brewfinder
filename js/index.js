@@ -104,9 +104,19 @@ function showDetails(brewery){
 document.querySelector('#show-detail').append(name,breweryType,address,phone,favoriteButton)
 }
 function addFavorite(brewery){
+    const favBrew=document.createElement('div')
+    favBrew.id=brewery.name
+
     const name=document.createElement('h2')
     name.textContent=brewery.name
-    document.querySelector('#favorites').appendChild(name)
+    
+    const deleteButton=document.createElement('button')
+    deleteButton.textContent='Remove from Favorites'
+    deleteButton.addEventListener('click',()=>{
+        favBrew.remove()
+    })
+    favBrew.append(name,deleteButton)
+    document.querySelector('#favorites').appendChild(favBrew)
 }
 }
 document.addEventListener("DOMContentLoaded", init);
