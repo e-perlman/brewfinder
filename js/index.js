@@ -8,6 +8,9 @@ searchForm.addEventListener('submit',e=>{
 
     searchBy(inputState,inputCity,inputKeyword)
 })
+function formatSearch(input){
+    return input.replaceAll(' ','_')  
+}
 function searchBy(state,city,keyword){
     const formatState=formatSearch(state.toLowerCase())
     const formatCity=formatSearch(city.toLowerCase())
@@ -20,7 +23,7 @@ function searchBy(state,city,keyword){
     }
     //Only keyword and city inputted, search by keyword and refine by city
     else if(keyword.length>0&&city.length>0&&state.length===0){
-        fetchKeyword(formatKeyword,formatCity,)  
+        fetchKeyword(formatKeyword,formatCity,formatState)  
     }
     //Only keyword and state is inputted, search by keyword and refine by state
     else if(keyword.length>0&&city.length===0&&state.length>0){
@@ -46,11 +49,11 @@ function searchBy(state,city,keyword){
         console.log('need more info!')
     }
 }
-function formatSearch(input){
-    console.log(input.replaceAll(' ','_'))
-    
-}
+
 function fetchKeyword(keyword,city,state){
+    console.log(keyword)
+    console.log(city)
+    console.log(state)
     fetch(`https://api.openbrewerydb.org/breweries/search?query=${keyword}`)
     .then(res=>res.json())
     .then(brewery=>listBrewery(brewery))
@@ -63,7 +66,47 @@ function fetchCity(city,state){
 function fetchState(state){
     fetch(`https://api.openbrewerydb.org/breweries?by_state=${state}`)
     .then(res=>res.json())
-    .then(brewery=>listBrewery(brewery))
+    .then(breweries=>listBrewery(breweries))
+}
+function listBrewery(breweries){
+    breweries.forEach(brewery=>{
+        const breweryName=document.createElement('li')
+        breweryName.textContent=brewery.name
+        document.querySelector('#beer-list').appendChild(breweryName)
+
+        breweryName.addEventListener('click',()=>{
+            const displayDetails=document.querySelector('#show-detail')
+            while(displayDetails.firstChild){
+                displayDetails.removeChild(displayDetails.firstChild)
+            }
+            showDetails(brewery)
+        })
+    })
+}
+function showDetails(brewery){
+    const name=document.createElement('h2')
+    name.textContent=brewery.name
+
+    const breweryType=document.createElement('h3')
+    breweryType.textContent=`Brewery Type: ${brewery['brewery_type']}`
+
+    const address=document.createElement('h4')
+    address.textContent=`Address: ${brewery.street} ${brewery.city}, ${brewery.state} ${brewery['postal_code']}`
+
+    const phone =document.createElement('h4')
+    phone.textContent=`Phone Number: ${brewery.phone}`
+
+    const favoriteButton=document.createElement('button')
+    favoriteButton.textContent='Add to Favorites'
+    favoriteButton.addEventListener('click',()=>{
+        addFavorite(brewery)
+    })
+document.querySelector('#show-detail').append(name,breweryType,address,phone,favoriteButton)
+}
+function addFavorite(brewery){
+    const name=document.createElement('h2')
+    name.textContent=brewery.name
+    document.querySelector('#favorites').appendChild(name)
 }
 }
 document.addEventListener("DOMContentLoaded", init);
