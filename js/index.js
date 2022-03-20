@@ -9,30 +9,38 @@ searchForm.addEventListener('submit',e=>{
     searchBy(inputState,inputCity,inputKeyword)
 })
 function searchBy(state,city,keyword){
+    const formatState=formatSearch(state.toLowerCase())
+    const formatCity=formatSearch(city.toLowerCase())
+    const formatKeyword=formatSearch(keyword.toLowerCase())
     //Order of specific search: keyword,city,state
+    
     // Only a keyword is inputted
     if (keyword.length>0&&city.length===0&&state.length===0){
-        fetchKeyword(keyword.toLowerCase())
+        fetchKeyword(formatKeyword)
     }
-    //Keyword and city inputted (state doesn't matter), search by keyword and refine by city
-    else if(keyword.length>0&&city.length>0){
-        formatSearch(city.toLowerCase())
-        //console.log(`${keyword} ${city}`)
+    //Only keyword and city inputted, search by keyword and refine by city
+    else if(keyword.length>0&&city.length>0&&state.length===0){
+        fetchKeyword(formatKeyword,formatCity,)  
     }
     //Only keyword and state is inputted, search by keyword and refine by state
     else if(keyword.length>0&&city.length===0&&state.length>0){
-        formatSearch(state.toLowerCase())
-        //console.log(`${keyword} ${state}`)
+        fetchKeyword(formatKeyword,formatState)
     }
-    //Only city inputted (state doesn't matter)
-    else if(keyword.length===0&&city.length>0){
-        formatSearch(city.toLowerCase())
-        //console.log(city)
+    //Keyword,city and state, search by keyword and refine by city and state
+    else if(keyword.length>0&&city.length>0&&state.length>0){
+        fetchKeyword(formatKeyword,formatCity,formatState)  
+    }
+    //Only city inputted
+    else if(keyword.length===0&&city.length>0&&state.length===0){
+        fetchCity(formatCity)
     }
     //Only state inputted
     else if(keyword.length===0&&city.length==0&&state.length>0){
-        formatSearch(state.toLowerCase())
-        //console.log(state)
+        fetchState(formatState)
+    }
+    //Only city and state inputted, search by city filter by state
+    else if(keyword.length===0&&city.length>0&&state.length>0){
+        fetchCity(formatCity,formatState)
     }
     else{
         console.log('need more info!')
@@ -42,12 +50,12 @@ function formatSearch(input){
     console.log(input.replaceAll(' ','_'))
     
 }
-function fetchKeyword(keyword){
+function fetchKeyword(keyword,city,state){
     fetch(`https://api.openbrewerydb.org/breweries/search?query=${keyword}`)
     .then(res=>res.json())
     .then(brewery=>listBrewery(brewery))
 }
-function fetchCity(city){
+function fetchCity(city,state){
     fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
     .then(res=>res.json())
     .then(brewery=>listBrewery(brewery))
