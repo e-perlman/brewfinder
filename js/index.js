@@ -11,6 +11,9 @@ searchForm.addEventListener('submit',e=>{
 function formatSearch(input){
     return input.replaceAll(' ','_')  
 }
+function unFormatSearch(input){
+    return input.replaceAll('_',' ')
+}
 function searchBy(state,city,keyword){
     const formatState=formatSearch(state.toLowerCase())
     const formatCity=formatSearch(city.toLowerCase())
@@ -61,27 +64,39 @@ function fetchKeyword(keyword,city,state){
 function fetchCity(city,state){
     fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
     .then(res=>res.json())
-    .then(brewery=>listBrewery(brewery))
+    .then(breweries=>{
+        breweries.forEach(brewery=>{
+            if (state===undefined){
+                listBrewery(brewery)
+            }
+            else{
+                const unFormatState=unFormatSearch(state)
+                if (unFormatState.toUpperCase()==brewery.state.toUpperCase()){
+                    listBrewery(brewery)
+                }
+                else{}
+            }
+        })
+    })
 }
 function fetchState(state){
     fetch(`https://api.openbrewerydb.org/breweries?by_state=${state}`)
     .then(res=>res.json())
-    .then(breweries=>listBrewery(breweries))
+    .then(breweries=>breweries.forEach(brewery=>listBrewery(brewery)))
 }
-function listBrewery(breweries){
-    breweries.forEach(brewery=>{
-        const breweryName=document.createElement('li')
-        breweryName.textContent=brewery.name
-        document.querySelector('#beer-list').appendChild(breweryName)
+function listBrewery(brewery){
+    const breweryName=document.createElement('li')
+    breweryName.textContent=brewery.name
+    document.querySelector('#beer-list').appendChild(breweryName)
 
-        breweryName.addEventListener('click',()=>{
-            const displayDetails=document.querySelector('#show-detail')
-            while(displayDetails.firstChild){
-                displayDetails.removeChild(displayDetails.firstChild)
-            }
-            showDetails(brewery)
-        })
+    breweryName.addEventListener('click',()=>{
+        const displayDetails=document.querySelector('#show-detail')
+        while(displayDetails.firstChild){
+            displayDetails.removeChild(displayDetails.firstChild)
+        }
+        showDetails(brewery)
     })
+    
 }
 function showDetails(brewery){
     const name=document.createElement('h2')
