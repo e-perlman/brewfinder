@@ -37,6 +37,9 @@ function searchBy(state,city,keyword,type){
     else if(keyword.length===0&&city.length==0&&state.length>0){
         fetchState(formatState,type)
     }
+    else if(keyword.length===0&&city.length==0&&state.length==0){
+        fetchType(type)
+    }
     else{
         console.log('need more info!')
     }
@@ -106,6 +109,11 @@ function fetchState(state,type){
         if(type==='none'){listBrewery(brewery)}
         else if(brewery['brewery_type']===type){listBrewery(brewery)}
     }))
+}
+function fetchType(type){
+    fetch(`https://api.openbrewerydb.org/breweries?by_type=${type}`)
+    .then(res=>res.json())
+    .then(breweries=>breweries.forEach(brewery=>listBrewery(brewery)))
 }
 function listBrewery(brewery){
     const breweryName=document.createElement('li')
