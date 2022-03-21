@@ -6,9 +6,8 @@ searchForm.addEventListener('submit',e=>{
     const inputCity=document.querySelector('#input-city').value 
     const inputKeyword=document.querySelector('#input-keyword').value
     const inputType=document.querySelector('#beer-type').value
-    console.log(inputType)
 
-    searchBy(inputState,inputCity,inputKeyword)
+    searchBy(inputState,inputCity,inputKeyword,inputType)
 })
 function formatSearch(input){
     return input.replaceAll(' ','_')  
@@ -16,30 +15,99 @@ function formatSearch(input){
 function unFormatSearch(input){
     return input.replaceAll('_',' ')
 }
-function searchBy(state,city,keyword){
+function searchBy(state,city,keyword,type){
     const formatState=formatSearch(state.toLowerCase())
     const formatCity=formatSearch(city.toLowerCase())
     const formatKeyword=formatSearch(keyword.toLowerCase())
-    //Order of specific search: keyword,city,state
-    
+    //Order of specific search: keyword,type,city,state
+    //Keyword no type
+    //keyword inputted
     if (keyword.length>0){
-        fetchKeyword(formatKeyword,formatCity,formatState)
+        fetchKeyword(formatKeyword,formatCity,formatState,type)
     }
-    //Only city and state inputted, search by city filter by state
-    else if(keyword.length===0&&city.length>0){
+    // else if (keyword.length>0&&type==='none'){
+    //     fetchKeywordNoType(formatKeyword,formatCity,formatState)
+    // }
+    //type but no keyword
+    else if(keyword.length===0&&type!=='none'){
+        fetchType(type,formatCity,formatState)
+    }
+    //city no keyword
+    else if(keyword.length===0&&city.length>0&&type==='none'){
         fetchCity(formatCity,formatState)
     }
     //Only state inputted
-    else if(keyword.length===0&&city.length==0&&state.length>0){
+    else if(keyword.length===0&&city.length==0&&state.length>0&&type==='none'){
         fetchState(formatState)
     }
+    
     else{
         console.log('need more info!')
     }
 }
 
-function fetchKeyword(keyword,city,state){
+function fetchKeyword(keyword,city,state,type){
     fetch(`https://api.openbrewerydb.org/breweries/search?query=${keyword}`)
+    .then(res=>res.json())
+    .then(breweries=>{
+        breweries.forEach(brewery=>{
+            if (state.length===0&&city.length===0){
+                if(type==='none'){listBrewery(brewery)}
+                else if(brewery['brewery_type']===type){listBrewery(brewery)}
+            }
+            else if (state.length===0){
+                const unFormatCity=unFormatSearch(city)
+                if (typeof brewery.city==='string'&& unFormatCity.toUpperCase()===brewery.city.toUpperCase()){
+                    if(type==='none'){listBrewery(brewery)}
+                    else if(brewery['brewery_type']===type){listBrewery(brewery)}
+                }
+                else{console.log('no results')}
+            }
+            else if (city.length===0){
+                const unFormatState=unFormatSearch(state)
+                if (typeof brewery.state==='string'&& unFormatState.toUpperCase()===brewery.state.toUpperCase()){
+                    if(type==='none'){listBrewery(brewery)}
+                    else if(brewery['brewery_type']===type){listBrewery(brewery)}
+                }
+                else{console.log('no results')}
+            }
+            else{
+                const unFormatState=unFormatSearch(state)
+                const unFormatCity=unFormatSearch(city)
+                if (typeof brewery.city==='string' && typeof brewery.state==='string'&& unFormatCity.toUpperCase()===brewery.city.toUpperCase()&&unFormatState.toUpperCase()===brewery.state.toUpperCase()){
+                    if(type==='none'){listBrewery(brewery)}
+                    else if(brewery['brewery_type']===type){listBrewery(brewery)}
+                }
+                else{console.log('no results')}
+            }
+        })
+    })
+}
+function fetchCity(city,state){
+    fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
+    .then(res=>res.json())
+    .then(breweries=>{
+        breweries.forEach(brewery=>{
+            if (state.length===0){
+                listBrewery(brewery)
+            }
+            else{
+                const unFormatState=unFormatSearch(state)
+                if (typeof brewery.state==='string'&& unFormatState.toUpperCase()===brewery.state.toUpperCase()){
+                    listBrewery(brewery)
+                }
+                else{console.log('no results')}
+            }
+        })
+    })
+}
+function fetchState(state){
+    fetch(`https://api.openbrewerydb.org/breweries?by_state=${state}`)
+    .then(res=>res.json())
+    .then(breweries=>breweries.forEach(brewery=>listBrewery(brewery)))
+}
+function fetchType(type,city,state){
+    fetch(`https://api.openbrewerydb.org/breweries?by_type=${type}`)
     .then(res=>res.json())
     .then(breweries=>{
         breweries.forEach(brewery=>{
@@ -70,29 +138,6 @@ function fetchKeyword(keyword,city,state){
             }
         })
     })
-}
-function fetchCity(city,state){
-    fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
-    .then(res=>res.json())
-    .then(breweries=>{
-        breweries.forEach(brewery=>{
-            if (state.length===0){
-                listBrewery(brewery)
-            }
-            else{
-                const unFormatState=unFormatSearch(state)
-                if (typeof brewery.state==='string'&& unFormatState.toUpperCase()===brewery.state.toUpperCase()){
-                    listBrewery(brewery)
-                }
-                else{console.log('no results')}
-            }
-        })
-    })
-}
-function fetchState(state){
-    fetch(`https://api.openbrewerydb.org/breweries?by_state=${state}`)
-    .then(res=>res.json())
-    .then(breweries=>breweries.forEach(brewery=>listBrewery(brewery)))
 }
 function listBrewery(brewery){
     const breweryName=document.createElement('li')
