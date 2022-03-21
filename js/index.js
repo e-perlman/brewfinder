@@ -5,6 +5,8 @@ searchForm.addEventListener('submit',e=>{
     const inputState=document.querySelector('#input-state').value
     const inputCity=document.querySelector('#input-city').value 
     const inputKeyword=document.querySelector('#input-keyword').value
+    const inputType=document.querySelector('#beer-type').value
+    console.log(inputType)
 
     searchBy(inputState,inputCity,inputKeyword)
 })
@@ -49,12 +51,14 @@ function fetchKeyword(keyword,city,state){
                 if (typeof brewery.city==='string'&& unFormatCity.toUpperCase()===brewery.city.toUpperCase()){
                     listBrewery(brewery)
                 }
+                else{console.log('no results')}
             }
             else if (city.length===0){
                 const unFormatState=unFormatSearch(state)
                 if (typeof brewery.state==='string'&& unFormatState.toUpperCase()===brewery.state.toUpperCase()){
                     listBrewery(brewery)
                 }
+                else{console.log('no results')}
             }
             else{
                 const unFormatState=unFormatSearch(state)
@@ -62,7 +66,7 @@ function fetchKeyword(keyword,city,state){
                 if (typeof brewery.city==='string' && typeof brewery.state==='string'&& unFormatCity.toUpperCase()===brewery.city.toUpperCase()&&unFormatState.toUpperCase()===brewery.state.toUpperCase()){
                     listBrewery(brewery)
                 }
-                else{}
+                else{console.log('no results')}
             }
         })
     })
@@ -80,7 +84,7 @@ function fetchCity(city,state){
                 if (typeof brewery.state==='string'&& unFormatState.toUpperCase()===brewery.state.toUpperCase()){
                     listBrewery(brewery)
                 }
-                else{}
+                else{console.log('no results')}
             }
         })
     })
