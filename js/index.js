@@ -20,33 +20,16 @@ function searchBy(state,city,keyword){
     const formatKeyword=formatSearch(keyword.toLowerCase())
     //Order of specific search: keyword,city,state
     
-    // Only a keyword is inputted
-    if (keyword.length>0&&city.length===0&&state.length===0){
-        fetchKeyword(formatKeyword)
+    if (keyword.length>0){
+        fetchKeyword(formatKeyword,formatCity,formatState)
     }
-    //Only keyword and city inputted, search by keyword and refine by city
-    else if(keyword.length>0&&city.length>0&&state.length===0){
-        fetchKeyword(formatKeyword,formatCity,formatState)  
-    }
-    //Only keyword and state is inputted, search by keyword and refine by state
-    else if(keyword.length>0&&city.length===0&&state.length>0){
-        fetchKeyword(formatKeyword,formatState)
-    }
-    //Keyword,city and state, search by keyword and refine by city and state
-    else if(keyword.length>0&&city.length>0&&state.length>0){
-        fetchKeyword(formatKeyword,formatCity,formatState)  
-    }
-    //Only city inputted
-    else if(keyword.length===0&&city.length>0&&state.length===0){
-        fetchCity(formatCity)
+    //Only city and state inputted, search by city filter by state
+    else if(keyword.length===0&&city.length>0){
+        fetchCity(formatCity,formatState)
     }
     //Only state inputted
     else if(keyword.length===0&&city.length==0&&state.length>0){
         fetchState(formatState)
-    }
-    //Only city and state inputted, search by city filter by state
-    else if(keyword.length===0&&city.length>0&&state.length>0){
-        fetchCity(formatCity,formatState)
     }
     else{
         console.log('need more info!')
@@ -54,24 +37,47 @@ function searchBy(state,city,keyword){
 }
 
 function fetchKeyword(keyword,city,state){
-    console.log(keyword)
-    console.log(city)
-    console.log(state)
     fetch(`https://api.openbrewerydb.org/breweries/search?query=${keyword}`)
     .then(res=>res.json())
-    .then(brewery=>listBrewery(brewery))
+    .then(breweries=>{
+        breweries.forEach(brewery=>{
+            if (state.length===0&&city.length===0){
+                listBrewery(brewery)
+            }
+            else if (state.length===0){
+                const unFormatCity=unFormatSearch(city)
+                if (typeof brewery.city==='string'&& unFormatCity.toUpperCase()===brewery.city.toUpperCase()){
+                    listBrewery(brewery)
+                }
+            }
+            else if (city.length===0){
+                const unFormatState=unFormatSearch(state)
+                if (typeof brewery.state==='string'&& unFormatState.toUpperCase()===brewery.state.toUpperCase()){
+                    listBrewery(brewery)
+                }
+            }
+            else{
+                const unFormatState=unFormatSearch(state)
+                const unFormatCity=unFormatSearch(city)
+                if (typeof brewery.city==='string' && typeof brewery.state==='string'&& unFormatCity.toUpperCase()===brewery.city.toUpperCase()&&unFormatState.toUpperCase()===brewery.state.toUpperCase()){
+                    listBrewery(brewery)
+                }
+                else{}
+            }
+        })
+    })
 }
 function fetchCity(city,state){
     fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
     .then(res=>res.json())
     .then(breweries=>{
         breweries.forEach(brewery=>{
-            if (state===undefined){
+            if (state.length===0){
                 listBrewery(brewery)
             }
             else{
                 const unFormatState=unFormatSearch(state)
-                if (unFormatState.toUpperCase()==brewery.state.toUpperCase()){
+                if (typeof brewery.state==='string'&& unFormatState.toUpperCase()===brewery.state.toUpperCase()){
                     listBrewery(brewery)
                 }
                 else{}
