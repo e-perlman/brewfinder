@@ -25,10 +25,6 @@ function searchBy(state,city,keyword,type){
     if (keyword.length>0){
         fetchKeyword(formatKeyword,formatCity,formatState,type)
     }
-    // //type but no keyword
-    // else if(keyword.length===0&&type!=='none'){
-    //     fetchType(type,formatCity,formatState)
-    // }
     //city no keyword
     else if(keyword.length===0&&city.length>0){
         fetchCity(formatCity,formatState,type)
@@ -37,7 +33,7 @@ function searchBy(state,city,keyword,type){
     else if(keyword.length===0&&city.length==0&&state.length>0){
         fetchState(formatState,type)
     }
-    else if(keyword.length===0&&city.length==0&&state.length==0){
+    else if(keyword.length===0&&city.length==0&&state.length==0&&type!=='none'){
         fetchType(type)
     }
     else{
@@ -116,8 +112,9 @@ function fetchType(type){
     .then(breweries=>breweries.forEach(brewery=>listBrewery(brewery)))
 }
 function listBrewery(brewery){
-    const breweryName=document.createElement('li')
+    const breweryName=document.createElement('button')
     breweryName.textContent=brewery.name
+    breweryName.className='list-group-item list-group-item-action bg-dark text-white'
     document.querySelector('#beer-list').appendChild(breweryName)
 
     breweryName.addEventListener('click',()=>{
@@ -130,34 +127,49 @@ function listBrewery(brewery){
     
 }
 function showDetails(brewery){
-    const name=document.createElement('h2')
+    const card=document.createElement('div')
+    card.className='card-body'
+
+    const name=document.createElement('h4')
     name.textContent=brewery.name
+    name.className='card-title'
 
-    const breweryType=document.createElement('h3')
+    const breweryType=document.createElement('h5')
     breweryType.textContent=`Brewery Type: ${brewery['brewery_type']}`
+    breweryType.className='"card-subtitle mb-2 text-muted"'
 
-    const address=document.createElement('h4')
+    const address=document.createElement('p')
     address.textContent=`Address: ${brewery.street} ${brewery.city}, ${brewery.state} ${brewery['postal_code']}`
+    address.className='card-text'
 
-    const phone =document.createElement('h4')
-    phone.textContent=`Phone Number: ${brewery.phone}`
+    const phone =document.createElement('p')
+    phone.textContent=`Phone: ${brewery.phone}`
+    phone.className='card-text'
 
     const favoriteButton=document.createElement('button')
     favoriteButton.textContent='Add to Favorites'
+    favoriteButton.className='button-23'
     favoriteButton.addEventListener('click',()=>{
         addFavorite(brewery)
     })
-document.querySelector('#show-detail').append(name,breweryType,address,phone,favoriteButton)
+    card.append(name,breweryType,address,phone,favoriteButton)
+    document.querySelector('#show-detail').appendChild(card)
 }
 function addFavorite(brewery){
     const favBrew=document.createElement('div')
     favBrew.id=brewery.name
+    favBrew.className='col-12'
 
-    const name=document.createElement('h2')
+    const name=document.createElement('h3')
     name.textContent=brewery.name
     
     const deleteButton=document.createElement('button')
-    deleteButton.textContent='Remove from Favorites'
+    deleteButton.className='btn btn-light'
+
+    const trash=document.createElement('i')
+    trash.className='bi-trash'
+    deleteButton.appendChild(trash)
+
     deleteButton.addEventListener('click',()=>{
         favBrew.remove()
     })

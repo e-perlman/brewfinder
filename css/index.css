@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+
+h1 {
+    font-family: 'Staatliches', cursive;
+    font-size:4em;
+    text-shadow: .1em .1em hsl(200 50% 30%);
+}
+h2 {
+    font-family: 'Staatliches', cursive;
+    color: black;
+    font-size:2em;
+    text-decoration: underline;
+}
+#submit-bttn{
+    font-family: 'Staatliches', cursive; 
+    text-shadow: .1em .1em hsl(200 50% 30%);
+}
+li{
+    cursor: pointer
+}
+.fav-delete-button{
+    border: 0; 
+    background: transparent"
+}
+
+.bi::before {
+    display: inline-block;
+    content: "";
+    vertical-align: -.125em;
+    background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z' clip-rule='evenodd'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+/* button-23 CSS*/
+.button-23 {
+    position: relative;
+    z-index: 3;
+    background: transparent;
+    color: #1172c4;
+    font-size: 14px !important;
+    border-color: #1172c4;
+    border-style: solid;
+    cursor: pointer;
+    border-width: 2px;
+    border-radius: 22px;
+    text-decoration:none; 
+    padding: 10px 40px;
+    text-transform: uppercase;
+    transition: all 0.2s linear;
+  }
+  
+  .button-23:active {
+    border-radius: 22px;
+  }
+  .button-23 {
+    font-weight: 700;
+    color: #7dc21e;
+      border-color: #7dc21e;
+    background: transparent;
+  }
+  .button-23:hover {
+     color: white;
+    background: #7dc21e;
+    border-color: #7dc21e;
+  }
