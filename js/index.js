@@ -147,10 +147,17 @@ function showDetails(brewery){
     phone.className='card-text'
 
     const favoriteButton=document.createElement('button')
-    favoriteButton.textContent='Add to Favorites'
-    favoriteButton.className='button-23'
+    favoriteButton.textContent='Favorite'
+    favoriteButton.className='btn btn-secondary'
+
+    const heart=document.createElement('i')
+    heart.className='bi-heart'
+    heart.id='fav-heart'
+    favoriteButton.appendChild(heart)
+
     favoriteButton.addEventListener('click',()=>{
         addFavorite(brewery)
+        heart.className='bi-heart-fill'
     })
     card.append(name,breweryType,address,phone,favoriteButton)
     document.querySelector('#show-detail').appendChild(card)
@@ -158,10 +165,11 @@ function showDetails(brewery){
 function addFavorite(brewery){
     const favBrew=document.createElement('div')
     favBrew.id=brewery.name
-    favBrew.className='col-12'
+    favBrew.className='col-12 mx-auto'
 
-    const name=document.createElement('h3')
+    const name=document.createElement('h5')
     name.textContent=brewery.name
+    name.className='text-center'
     
     const deleteButton=document.createElement('button')
     deleteButton.className='btn btn-light'
@@ -170,8 +178,11 @@ function addFavorite(brewery){
     trash.className='bi-trash'
     deleteButton.appendChild(trash)
 
+    const heart=document.querySelector('#fav-heart')
+
     deleteButton.addEventListener('click',()=>{
         favBrew.remove()
+        heart.className='bi-heart'
     })
     favBrew.append(name,deleteButton)
     document.querySelector('#favorites').appendChild(favBrew)

@@ -33,35 +33,6 @@ li{
     background-size: 1rem 1rem;
   }
 
-/* button-23 CSS*/
-.button-23 {
-    position: relative;
-    z-index: 3;
-    background: transparent;
-    color: #1172c4;
-    font-size: 14px !important;
-    border-color: #1172c4;
-    border-style: solid;
-    cursor: pointer;
-    border-width: 2px;
-    border-radius: 22px;
-    text-decoration:none; 
-    padding: 10px 40px;
-    text-transform: uppercase;
-    transition: all 0.2s linear;
-  }
-  
-  .button-23:active {
-    border-radius: 22px;
-  }
-  .button-23 {
-    font-weight: 700;
-    color: #7dc21e;
-      border-color: #7dc21e;
-    background: transparent;
-  }
-  .button-23:hover {
-     color: white;
-    background: #7dc21e;
-    border-color: #7dc21e;
+  #fav-heart{
+      color: red;
   }
