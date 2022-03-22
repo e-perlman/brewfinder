@@ -136,10 +136,10 @@ function showDetails(brewery){
 
     const breweryType=document.createElement('h5')
     breweryType.textContent=`Brewery Type: ${brewery['brewery_type']}`
-    breweryType.className='"card-subtitle mb-2 text-muted"'
+    breweryType.className='card-subtitle mb-2 text-muted'
 
     const address=document.createElement('p')
-    address.textContent=`Address: ${brewery.street} ${brewery.city}, ${brewery.state} ${brewery['postal_code']}`
+    address.textContent=`Address: ${brewery.street} \n${brewery.city}, ${brewery.state} ${brewery['postal_code']}`
     address.className='card-text'
 
     const phone =document.createElement('p')
@@ -163,16 +163,17 @@ function showDetails(brewery){
     document.querySelector('#show-detail').appendChild(card)
 }
 function addFavorite(brewery){
-    const favBrew=document.createElement('div')
+    const favBrew=document.createElement('li')
     favBrew.id=brewery.name
-    favBrew.className='col-12 mx-auto'
+    favBrew.className='list-group-item p-1 d-inline-flex justify-content-center align-tems-center bg-dark text-white'
+    // favBrew.className='container d-flex justify-content-center align-items-center bg-dark text-white'
 
-    const name=document.createElement('h5')
+    const name=document.createElement('h6')
     name.textContent=brewery.name
-    name.className='text-center'
+    name.className='align-self-center'
     
     const deleteButton=document.createElement('button')
-    deleteButton.className='btn btn-light'
+    deleteButton.className='btn btn-secondary align-self-center'
 
     const trash=document.createElement('i')
     trash.className='bi-trash'
