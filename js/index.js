@@ -147,7 +147,7 @@ function showDetails(brewery){
     phone.className='card-text'
 
     const favoriteButton=document.createElement('button')
-    favoriteButton.textContent='Favorite'
+    favoriteButton.textContent='Favorite '
     favoriteButton.className='btn btn-secondary'
 
     const heart=document.createElement('i')
@@ -165,15 +165,18 @@ function showDetails(brewery){
 function addFavorite(brewery){
     const favBrew=document.createElement('li')
     favBrew.id=brewery.name
-    favBrew.className='list-group-item p-1 d-inline-flex justify-content-center align-tems-center bg-dark text-white'
-    // favBrew.className='container d-flex justify-content-center align-items-center bg-dark text-white'
+    // favBrew.className='list-group-item p-1 d-inline-flex justify-content-center align-tems-center bg-dark text-white'
+    //favBrew.className='list-group-item p-0 m-0 d-inline-flex bg-dark text-white'
+    favBrew.className='list-group-item p-0 mr-0 d-inline-block bg-dark text-white'
+
+
 
     const name=document.createElement('h6')
     name.textContent=brewery.name
-    name.className='align-self-center'
+    name.className='align-middle float-left'
     
     const deleteButton=document.createElement('button')
-    deleteButton.className='btn btn-secondary align-self-center'
+    deleteButton.className='btn btn-secondary float-right'
 
     const trash=document.createElement('i')
     trash.className='bi-trash'

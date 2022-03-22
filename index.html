@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="css/reset.css"> -->
     <link rel="stylesheet" href="css/index.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
     <script src="js/index.js"></script>
 </head>
   <body>
@@ -18,10 +20,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
     <div class="container-fluid p-3 mb-2 bg-dark text-white" id='main-title'>
-        <h1 class="text-center">BREWFINDER</h1>
+        <h1 class="text-center">BREWFINDER <span class="material-icons-outlined md-60 align-middle">sports_bar</span></h1>
     </div>   
-    
-    <div id="background"></div>
     <div class= container id="form">
        <form id="search-form">
             <div class="form-group" id="search-state">
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group" id="search-keyword">
                 <label for="input-keyword">Search Brewery</label>
-                <input type="text" class="form-control" id='input-keyword' placeholder="Brewery Name">              
+                <input type="text" class="form-control" id='input-keyword' placeholder="Brewery Name/Keyword">              
             </div>
             <div class="form-group">
                 <label for="beer-type">Beer Type</label>
@@ -53,7 +53,9 @@
                     <option>closed</option>
                 </select>
               </div> 
-            <button type="submit" id='submit-bttn' class="btn btn-secondary btn-lg btn-block">Find me a beer!</button>
+            <button type="submit" id='submit-bttn' class="btn btn-secondary btn-lg btn-block">
+                Find me a beer! <span class="material-icons align-middle">emoji_emotions</span>
+            </button>
        </form>
        
     </div>
@@ -66,7 +68,7 @@
               </div>
               <div class="col">
                 <h2 class="text-center">Brewery Details</h2>
-                <div class="card text-white bg-dark mb-3 mx-auto" style="width: 18rem;" id="show-detail"></div>
+                <div class="card text-white bg-dark mb-3 mx-auto" style="width: 22rem;" id="show-detail"></div>
               </div>
               <div class="col">
                 <h2 class="text-center">Favorites List</h2>
