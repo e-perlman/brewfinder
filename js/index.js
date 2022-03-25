@@ -139,7 +139,7 @@ function showDetails(brewery){
     breweryType.className='card-subtitle mb-2 text-muted'
 
     const address=document.createElement('p')
-    address.textContent=`Address: ${brewery.street} \n${brewery.city}, ${brewery.state} ${brewery['postal_code']}`
+    address.innerText=`Address: ${brewery.street} \n${brewery.city}, ${brewery.state} ${brewery['postal_code']}`
     address.className='card-text'
 
     const phone =document.createElement('p')
@@ -167,16 +167,16 @@ function addFavorite(brewery){
     favBrew.id=brewery.name
     // favBrew.className='list-group-item p-1 d-inline-flex justify-content-center align-tems-center bg-dark text-white'
     //favBrew.className='list-group-item p-0 m-0 d-inline-flex bg-dark text-white'
-    favBrew.className='list-group-item p-0 mr-0 d-inline-block bg-dark text-white'
+    favBrew.className='list-group-item p-0 mr-0 bg-dark text-white'
 
 
 
     const name=document.createElement('h6')
     name.textContent=brewery.name
-    name.className='align-middle float-left'
+    name.className='float-left'
     
     const deleteButton=document.createElement('button')
-    deleteButton.className='btn btn-secondary float-right'
+    deleteButton.className='btn btn-secondary mr-0 float-right'
 
     const trash=document.createElement('i')
     trash.className='bi-trash'

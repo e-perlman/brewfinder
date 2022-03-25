@@ -33,6 +33,7 @@ h2 {
 }
 h4{
     font-family: 'Fugaz One', cursive;
+    text-shadow: .1em .1em hsl(200 50% 30%);
 }
 .card-body{
     font-family: 'Staatliches', cursive;
