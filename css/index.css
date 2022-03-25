@@ -2,16 +2,23 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Fugaz+One&family=Staatliches&display=swap');
 
-/* #main-title{
-    background-image: url("../images/beer_mug.jpeg");
+#main-title{
+    position: relative;
+    z-index: 1;
+}
+#main-title::before{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image:url("../images/beer_wall.jpeg");
     background-size: contain;
-} */
-/* #form{
-    background-image: url("../images/beer_mug.jpeg");
-    background-size: contain;
-    background-position: left;
-} */
-
+    opacity: .6;
+    
+}
 
 .f-l {
     float: left;
