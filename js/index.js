@@ -37,7 +37,7 @@ function searchBy(state,city,keyword,type){
         fetchType(type)
     }
     else{
-        console.log('need more info!')
+        window.alert("Please provide at least one search parameter!");
     }
 }
 
