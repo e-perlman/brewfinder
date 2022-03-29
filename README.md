@@ -2,7 +2,7 @@
 
 ## Description
 
-Brewfinder is a JS application that uses DOM manipulation for user interaction. This application allows the user to search for breweries by any combination of the following search parameters: state, city, keyword and brewery type. I live in Portland, OR which has been know as one of the best beer cities in the country. A great way for me to explore the city has been to visit local breweries, and this application makes it easy for everyone to do so! [https://medium.com/@emmajperlman"] (You can learn more details and features about the project here!)
+Brewfinder is a JS application that uses DOM manipulation for user interaction. This application allows the user to search for breweries by any combination of the following search parameters: state, city, keyword and brewery type. I live in Portland, OR which has been know as one of the best beer cities in the country. A great way for me to explore the city has been to visit local breweries, and this application makes it easy for everyone to do so! [https://medium.com/@emmajperlman/the-basics-of-cross-referencing-with-a-search-engine-9f5e4fa0d5c5] This blog post goes into further detail about the cross referencing conditionals of the brewery search engine!
 
 ## Installation
 
