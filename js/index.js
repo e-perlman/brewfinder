@@ -77,7 +77,6 @@ function fetchKeyword(keyword,city,state,type){
                     if(type==='none'){listBrewery(brewery)} //No type is selected
                     else if(brewery['brewery_type']===type){listBrewery(brewery)} //Type is selected
                 }
-                else{console.log('no results')}
             }
         })
     })

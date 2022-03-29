@@ -18,6 +18,9 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+## Credit
+Background Image: [https://www.wallpaperflare.com/search?wallpaper=beer+can]
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
