@@ -117,12 +117,12 @@ function fetchType(type){ //Only type inputted, no keyword, city or state
     .then(breweries=>breweries.forEach(brewery=>listBrewery(brewery)))
 }
 //Lists the breweries as buttons in an ul in the first column
+
 function listBrewery(brewery){
     const breweryName=document.createElement('button')
     breweryName.textContent=brewery.name
-    breweryName.className='list-group-item list-group-item-action bg-dark text-white'
+    breweryName.className='brewery list-group-item list-group-item-action bg-dark text-white'
     document.querySelector('#beer-list').appendChild(breweryName)
-
     breweryName.addEventListener('click',()=>{ //When specific brewery is clicked
         const displayDetails=document.querySelector('#show-detail') 
         while(displayDetails.firstChild){ //If a brewery in the ul is clicked, #show-detail contents clears
@@ -130,8 +130,8 @@ function listBrewery(brewery){
         }
         showDetails(brewery)//Shows brewery details
     })
-    
 }
+
 //Shows brewery details as a card in the second column
 function showDetails(brewery){
     const card=document.createElement('div')
@@ -196,6 +196,6 @@ function addFavorite(brewery){
     })
     favBrew.append(name,deleteButton)
     document.querySelector('#favorites').appendChild(favBrew)
-}
+} 
 }
 document.addEventListener("DOMContentLoaded", init);
